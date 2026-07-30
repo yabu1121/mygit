@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/Yabu1121/mygit/internal/commands"
 )
 
 func main() {
@@ -13,11 +15,11 @@ func main() {
 
 	switch os.Args[1] {
 	case "init":
-		if err := commands.Init; err != nil {
+		if err := commands.Init(); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 	default:
-		fmt.Println("unknown command: %s\n", os.Args[1])
+		fmt.Printf("unknown command: %s\n", os.Args[1])
 	}
 }
