@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Yabu1121/mygit/internal/commands"
+	"github.com/yabu1121/mygit/internal/commands"
 )
 
 func main() {
@@ -20,6 +20,7 @@ func main() {
 			os.Exit(1)
 		}
 	default:
-		fmt.Printf("unknown command: %s\n", os.Args[1])
+		fmt.Fprintf(os.Stderr, "unknown command: %s \n", os.Args[1])
+		os.Exit(1)
 	}
 }
