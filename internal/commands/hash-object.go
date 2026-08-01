@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func HashObject(filePath string) error {
+func HashObject(filePath string, write bool) error {
 	content, err := os.ReadFile(filePath)
 	if err != nil {
 		return fmt.Errorf("read file %s: %w", filePath, err)
@@ -18,6 +18,10 @@ func HashObject(filePath string) error {
 
 	hash := sha1.Sum(objectData)
 	fmt.Printf("%x\n", hash)
+
+	if write {
+		fmt.Println("write mode")
+	}
 
 	return nil
 }

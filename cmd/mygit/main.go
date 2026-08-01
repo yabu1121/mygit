@@ -26,7 +26,20 @@ func main() {
 			fmt.Println("usage: mygit hash-object <file>")
 			os.Exit(1)
 		}
-		if err := commands.HashObject(os.Args[2]); err != nil {
+
+		write := false
+		filePath := os.Args[2]
+
+		if os.Args[2] == "-w" {
+			if len(os.Args) < 4 {
+				fmt.Println("usage: mygit hash-object -w <file>")
+				os.Exit(1)
+			}
+			write = true
+			filePath = os.Args[3]
+		}
+
+		if err := commands.HashObject(filePath, write); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
