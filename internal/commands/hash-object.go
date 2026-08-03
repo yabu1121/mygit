@@ -19,10 +19,9 @@ func HashObject(filePath string, write bool) error {
 	objectData := append([]byte(header), content...)
 
 	hash := sha1.Sum(objectData)
-	fmt.Printf("%x\n", hash)
+	hashString := fmt.Sprintf("%x", hash)
 
 	if write {
-		hashString := fmt.Sprintf("%x", hash)
 
 		dirName := hashString[:2]
 		fileName := hashString[2:]
@@ -49,5 +48,6 @@ func HashObject(filePath string, write bool) error {
 			return fmt.Errorf("close zlib writer: %w", err)
 		}
 	}
+	fmt.Println(hashString)
 	return nil
 }
