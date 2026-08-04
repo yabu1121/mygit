@@ -44,6 +44,21 @@ func main() {
 			os.Exit(1)
 		}
 
+	case "cat-file":
+		if len(os.Args) < 4 {
+			fmt.Println("usage: mygit cat-file -p <hash>")
+			os.Exit(1)
+		}
+		option, err := commands.ParseCatFileOption(os.Args[2])
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		objectID := os.Args[3]
+		if err := commands.CatFile(option, objectID); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command: %s \n", os.Args[1])
 		os.Exit(1)
